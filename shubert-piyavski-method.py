@@ -1,4 +1,4 @@
-# Shubert-Piyavski-Method for approximating the location of the global minimum inside a closed interval
+# Shubert-Piyavski-Method for approximating the location of the global maximum(or minimum) inside a closed interval
 
 # function to be analyzed
 f = lambda z: -z ** 4 + 4 * z ** 3 + 30 * z ** 2 - 50 * z + 200
