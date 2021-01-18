@@ -1,6 +1,6 @@
 using Distributions
 
-function particleSwarmOptimization(f,dimensions,dimensionsConstraints,populationSize; startWeight=0.9,minWeight=0.4,c1=2.0,c2=2.0,maxIter=100, maxVelocity=20.0)
+function particleSwarmOptimization(f,dimensions,dimensionsConstraints,populationSize; startWeight=0.9,minWeight=0.4,c1=2.0,c2=2.0,maxIter=1000, maxVelocity=20.0)
     #initialize the population
     particlePositions = generatePopulation(populationSize,size(dimensionsConstraints)[1],dimensionsConstraints)
 
@@ -87,25 +87,33 @@ end
 
 
 branin(x; a=1, b=5.1/(4π^2), c=5/π, r=6, s=10, t=1/(8π)) = a*(x[2]-b*x[1]^2+c*x[1]-r)^2 + s*(1-t)*cos(x[1]) + s
-dimensionConstraints = [ [-10.0,20.0], [-10.0,20.0] ]
+dimensionConstraints = [ [-100.0,100.0], [-100.0,100.0] ]
 
 using Plots
 Plots.pyplot() # back to pyplot
-x = -10:0.01:20.0
-y = -10.0:0.01:20.0
+x = -20:0.005:30.0
+y = -20.0:0.005:30.0
 g(x,y;a=1, b=5.1/(4π^2), c=5/π, r=6, s=10, t=1/(8π)) = begin
     a*(y-b*x^2+c*x-r)^2 + s*(1-t)*cos(x) + s
-#        (1.0-x)^2 + 5.0*(y-x^2)^2
     end
 X = repeat(reshape(x, 1, :), length(y), 1)
 Y = repeat(y, 1, length(x))
 Z = map(g, X, Y)
 default(size=(1000,600))
 
-contour(x, y, g,levels=100,linewidth=2.0)
+contour(x, y, g,levels=300,linewidth=2.0)
 
-bestSolution = particleSwarmOptimization(branin,size(dimensionConstraints)[1],dimensionConstraints,40)
+#bestSolution = particleSwarmOptimization(branin,size(dimensionConstraints)[1],dimensionConstraints,40)
 
-println("Best point so far :")
-println(bestSolution)
-scatter!([bestSolution[1]],[bestSolution[2]],label="Best solution")
+#println("Best point so far :")
+
+
+#println(bestSolution)
+
+#firstParam = []
+#secondParam = []
+#for i in 1:size(bestSolution)[1]
+#    push!(firstParam,bestSolution[i][1])
+#    push!(secondParam,bestSolution[i][2])
+#end
+#scatter!(firstParam,secondParam,label="Best solution")
