@@ -38,10 +38,10 @@ function strong_backtracking_line_search(f, ∇f, x0, d; α=1, β=exp(-4),σ = 0
     end
 end
 
-#using ReverseDiff
+using ReverseDiff
 
-#x0 = [-1,-1]
-#direction = [1/sqrt(2),1/sqrt(2)]
-#rosenbrock(x) = (1-x[1])^2 + 105*(x[2]-x[1]^2)^2
-#∇f = x -> ReverseDiff.gradient(rosenbrock,x)
-#println(strong_backtracking_line_search(rosenbrock,∇f,x0,direction,α=1,σ=0.1))
+x0 = [-1,-1]
+direction = [1/sqrt(2),1/sqrt(2)]
+rosenbrock(x) = (1-x[1])^2 + 105*(x[2]-x[1]^2)^2
+∇f = x -> ReverseDiff.gradient(rosenbrock,x)
+println(strong_backtracking_line_search(rosenbrock,∇f,x0,direction,α=1,σ=0.1))

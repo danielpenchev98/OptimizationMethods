@@ -1,6 +1,6 @@
 using LinearAlgebra
 #β is momentum decay, v is momentum
-function accelerated_steepest_descent(f,∇f,x;β=0.4,ϵ=0.005)
+function accelerated_steepest_descent(f,∇f,x;β=0.4,ϵ=0.000005)
     x_prev, x_curr = NaN, x
     iteration = 1
     v = zeros(length(x))
@@ -19,7 +19,7 @@ function accelerated_steepest_descent(f,∇f,x;β=0.4,ϵ=0.005)
 end
 
 using ReverseDiff
-x0 = [-1.2,1]
+x0 = [-3.5,-3.5]
 rosenbrock(x; a=1.0, b=100.0) = (a-x[1])^2 + b*(x[2]-x[1]^2)^2
 ∇f = x -> ReverseDiff.gradient(rosenbrock,x)
 println(accelerated_steepest_descent(rosenbrock,∇f,x0))
